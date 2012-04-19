@@ -29,7 +29,7 @@ ant -f jasper-rt-distribution/build.xml clean deploy
 /etc/init.d/tomcat6 restart
 ```
 
-You should now be able to configure a RT Data Sources as well as define RTRIQL (= RT Rest Interface Query Language) queries.
+You should now be able to configure RT Data Sources as well as define RTRIQL (= RT Rest Interface Query Language) queries.
 
 
 ***
