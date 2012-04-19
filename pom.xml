@@ -6,8 +6,8 @@
     <version>0.1.0</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
-  <groupId>de.boksa.jasper.rt</groupId>
-  <artifactId>jasper-rt</artifactId>
+  <groupId>de.boksa.rt</groupId>
+  <artifactId>rt-jasper</artifactId>
   <version>0.0.1-SNAPSHOT</version>
  
   <properties>
@@ -28,14 +28,14 @@
     </dependency>
     <dependency>
       <groupId>de.boksa.rt</groupId>
-      <artifactId>rt-rest-dao</artifactId>
+      <artifactId>rt-rest</artifactId>
       <version>0.0.1-SNAPSHOT</version>
     </dependency>
   </dependencies>
  
  
   <build>
-    <finalName>jasper-rt</finalName>
+    <finalName>rt-jasper</finalName>
     <plugins>
     
       <plugin>
@@ -54,7 +54,7 @@
               <artifactItems>
                 <artifactItem>
                   <groupId>de.boksa.rt</groupId>
-                  <artifactId>rt-rest-dao</artifactId> 
+                  <artifactId>rt-rest</artifactId> 
                 </artifactItem>
               </artifactItems>
             </configuration>
