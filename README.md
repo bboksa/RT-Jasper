@@ -19,13 +19,13 @@ mvn clean assembly:assembly
 Now you need to copy the resulting ZIP file to your server and extract all files from it:
 
 ```
-unzip jasper-rt-distribution.zip
+unzip rt-jasper-distribution.zip
 ```
 
-Take a look at jasper-rt-distribution/build.xml to make sure all properties (espacially webAppDir) are set correctly and then execute:
+Take a look at rt-jasper-distribution/build.xml to make sure all properties (espacially webAppDir) are set correctly and then execute:
 
 ```
-ant -f jasper-rt-distribution/build.xml clean deploy
+ant -f rt-jasper-distribution/build.xml clean deploy
 /etc/init.d/tomcat6 restart
 ```
 
