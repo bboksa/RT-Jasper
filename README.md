@@ -1,5 +1,7 @@
 ## RT-Jasper
 
+### Installation
+
 To use RT-Jasper you need to first install [RT-REST](http://bboksa.github.com/RT-REST "RT-REST") to your local maven repository:
 
 ```
@@ -31,6 +33,9 @@ ant -f rt-jasper-distribution/build.xml clean deploy
 
 You should now be able to configure RT Data Sources as well as define RTRIQL (= RT Rest Interface Query Language) queries.
 
+### Further information
+
+For further information please refert to the [RT-Jasper Wiki](https://github.com/bboksa/RT-Jasper/wiki).
 
 ***
 
