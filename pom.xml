@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <parent>
+    <artifactId>maven-default-pom</artifactId>
+    <groupId>de.boksa.maven.defaults</groupId>
+    <version>0.1.0</version>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>de.boksa.jasper.rt</groupId>
+  <artifactId>jasper-rt</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+ 
+  <properties>
+    <assembly.id>distribution</assembly.id>
+  </properties>
+ 
+  <dependencies>
+    <dependency>
+      <groupId>com.jaspersoft.jasperserver.api.metadata</groupId>
+      <artifactId>jasperserver-api-metadata</artifactId>
+      <version>4.5.0</version>
+      <exclusions>
+        <exclusion>
+          <groupId>mondrian</groupId>
+          <artifactId>mondrian</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>de.boksa.rt</groupId>
+      <artifactId>rt-rest-dao</artifactId>
+      <version>0.0.1-SNAPSHOT</version>
+    </dependency>
+  </dependencies>
+ 
+ 
+  <build>
+    <finalName>jasper-rt</finalName>
+    <plugins>
+    
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <version>2.4</version>
+        <executions>
+          <execution>
+            <id>copy</id>
+            <phase>package</phase>
+            <goals>
+              <goal>copy</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>${project.build.directory}/lib</outputDirectory>
+              <artifactItems>
+                <artifactItem>
+                  <groupId>de.boksa.rt</groupId>
+                  <artifactId>rt-rest-dao</artifactId> 
+                </artifactItem>
+              </artifactItems>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <version>2.3</version>
+        <configuration>
+          <descriptors>
+            <descriptor>distribution/assembly.xml</descriptor>
+          </descriptors>
+          <outputDirectory>${basedir}/distribution</outputDirectory>          
+        </configuration>
+      </plugin>
+          
+      <plugin>
+        <artifactId>maven-clean-plugin</artifactId>
+        <version>2.4.1</version>        
+        <configuration>
+          <filesets>
+            <fileset>
+              <directory>${basedir}/distribution</directory>
+              <includes>
+                <include>**</include>
+              </includes>
+              <excludes>
+                <exclude>**/*.xml</exclude>
+              </excludes>
+              <followSymlinks>false</followSymlinks>              
+            </fileset>
+          </filesets>
+        </configuration>
+      </plugin>    
+      
+    </plugins>    
+  </build> 
+ 
+  <repositories>  
+    <repository>
+      <id>boksa-repository</id>
+      <url>https://services.boksa.de/maven/repositories/boksa</url>
+    </repository>
+    <repository>
+      <id>jasperreports-server-cp-4.5.0-maven-repository</id> 
+      <url>https://services.boksa.de/maven/repositories/jasperreports-server-cp-4.5.0</url>
+    </repository>    
+  </repositories>
+  
+</project>

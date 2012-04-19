@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="jasper-rt-integration" default="deploy" basedir=".">
+  <!--+
+      | Points to where jasperserver is installed on tomcat or another webapp server.
+      | Used to find JARs for compiling as well as deploying
+      +-->
+  <property name="webAppDir" value="/var/lib/tomcat6/webapps/jasperserver"/>
+
+  <target name="clean">
+    <delete dir="classes"/>
+  </target>
+  <target name="compile">
+    <mkdir dir="classes"/>
+    <javac srcdir="src" destdir="classes" debug="true">
+      <classpath>
+        <fileset dir="${webAppDir}/WEB-INF/lib">
+          <include name="*.jar"/>
+        </fileset>
+        <fileset dir="webapp/WEB-INF/lib">
+          <include name="*.jar"/>
+        </fileset>
+      </classpath>
+    </javac>
+  </target>
+  <target name="deploy" depends="compile">
+    <echo message="webapp src..."/>
+    <copy todir="${webAppDir}">
+      <fileset dir="webapp"/>
+    </copy>
+    <!-- copy classes dir -->
+    <echo message="classes..."/>
+    <copy todir="${webAppDir}/WEB-INF/classes">
+      <fileset dir="classes"/>
+    </copy>
+  </target>
+</project>
