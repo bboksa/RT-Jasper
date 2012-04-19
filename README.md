@@ -1,5 +1,7 @@
 ## RT-Jasper
 
+![JasperServer - Report Result](https://raw.github.com/wiki/bboksa/RT-Jasper/images/JasperServer%20-%20Report%20Result.png)
+
 ### Try RT-Jasper!
 
 You can log into a JasperServer instance and run a report yourself: [Run a demo on JasperServer](https://github.com/bboksa/RT-Jasper/wiki/Run-a-demo-on-JasperServer)!
