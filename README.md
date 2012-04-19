@@ -16,7 +16,13 @@ cd RT-Jasper
 mvn clean assembly:assembly
 ```
 
-Now you need to copy the resulting ZIP file to your server and extract all files from it:
+Now you need to copy the resulting ZIP file to your server:
+
+```
+scp distribution/rt-jasper-distribution.zip johndoe@server.example.com:/some/path
+```
+
+On your server extract all files from the ZIP:
 
 ```
 unzip rt-jasper-distribution.zip
