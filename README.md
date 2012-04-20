@@ -8,7 +8,9 @@ You can log into a JasperServer instance and run a report yourself: [Run a demo 
 
 ### Installation
 
-To use RT-Jasper you need to first install [RT-REST](http://bboksa.github.com/RT-REST "RT-REST") to your local maven repository:
+To use RT-Jasper you need to have a working [RT: Request Tracker](http://bestpractical.com/rt/) installation and have command line access to a machine running [JasperServer](http://jasperforge.org/projects/jasperserver).
+
+To use RT-Jasper you need to first install [RT-REST](http://projects.boksa.de/RT-REST "RT-REST") to your local maven repository:
 
 ```
 git clone git@github.com:bboksa/RT-REST.git
