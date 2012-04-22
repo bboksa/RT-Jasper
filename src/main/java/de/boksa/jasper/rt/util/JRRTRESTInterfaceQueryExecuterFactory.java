@@ -1,6 +1,6 @@
 /*
  * RT-Jasper - RT-Jasper is a toolkit to integrate RT: Request Tracker as a queryable data source in JasperServer.
- * Copyright (C) 2012  Benjamin Boksa
+ * Copyright (C) 2012  Benjamin Boksa (http://www.boksa.de/)
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
