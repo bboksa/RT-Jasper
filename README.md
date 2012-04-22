@@ -50,3 +50,8 @@ You should now be able to configure RT DataSources as well as define RTRIQL (RT 
 ### Further information
 
 For further information please refert to the [RT-Jasper Wiki](https://github.com/bboksa/RT-Jasper/wiki).
+
+***
+
+Copyright (C) 2012  Benjamin Boksa (http://www.boksa.de/).
+Licensed under the AGPL, Version 3.0. See LICENSE for details.
