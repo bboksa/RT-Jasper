@@ -21,7 +21,6 @@ import java.util.Map;
 
 import net.sf.jasperreports.engine.JRDataset;
 import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JRValueParameter;
 import net.sf.jasperreports.engine.query.JRQueryExecuter;
 import net.sf.jasperreports.engine.query.JRQueryExecuterFactory;
 
@@ -41,8 +40,9 @@ public class JRRTRESTInterfaceQueryExecuterFactory implements JRQueryExecuterFac
 		PARAMETER_RT_TICKET_DAO, RTTicketDAO.class
 	};
 	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
-	public JRQueryExecuter createQueryExecuter(JRDataset dataset, Map<java.lang.String,? extends JRValueParameter> parameters) throws JRException {
+	public JRQueryExecuter createQueryExecuter(JRDataset dataset, Map parameters) throws JRException {
 		LOG.debug("createQueryExecuter called");
 		return new JRRTRESTInterfaceQueryExecuter(dataset, parameters);
 	}
