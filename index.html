@@ -1,0 +1,122 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>RT-Jasper by bboksa</title>
+    
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>RT-Jasper</h1>
+        <p>RT-Jasper is a toolkit to integrate RT: Request Tracker as a queryable data source in JasperServer.</p>
+        <p class="view"><a href="https://github.com/bboksa/RT-Jasper">View the Project on GitHub <small>bboksa/RT-Jasper</small></a></p>
+        <ul>
+          <li><a href="https://github.com/bboksa/RT-Jasper/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/bboksa/RT-Jasper/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/bboksa/RT-Jasper">Fork On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h2>RT-Jasper</h2>
+
+<p><img src="https://raw.github.com/wiki/bboksa/RT-Jasper/images/JasperServer%20-%20Report%20Result.png" alt="JasperServer - Report Result"></p>
+
+<h3>Try RT-Jasper!</h3>
+
+<p>You can log into a JasperServer instance and run a report yourself: <a href="https://github.com/bboksa/RT-Jasper/wiki/Run-a-demo-on-JasperServer">Run a demo on JasperServer</a>!</p>
+
+<h3>Installation</h3>
+
+<p>To use RT-Jasper you need to have a working <a href="http://bestpractical.com/rt/">RT: Request Tracker</a> installation and have command line access to a machine running <a href="http://jasperforge.org/projects/jasperserver">JasperServer</a>.</p>
+
+<p>To use RT-Jasper you need to first install <a href="http://projects.boksa.de/RT-REST" title="RT-REST">RT-REST</a> to your local maven repository:</p>
+
+<pre><code>git clone git@github.com:bboksa/RT-REST.git
+cd RT-REST
+mvn install
+</code></pre>
+
+<p>After that you can clone RT-Jasper and build the distribution files:</p>
+
+<pre><code>git clone git@github.com:bboksa/RT-Jasper.git
+cd RT-Jasper
+mvn clean assembly:assembly
+</code></pre>
+
+<p>Now you need to copy the resulting ZIP file to your server:</p>
+
+<pre><code>scp distribution/rt-jasper-distribution.zip johndoe@server.example.com:/some/path
+</code></pre>
+
+<p>On your server extract all files from the ZIP:</p>
+
+<pre><code>unzip rt-jasper-distribution.zip
+</code></pre>
+
+<p>Take a look at rt-jasper-distribution/build.xml to make sure all properties (espacially webAppDir) are set correctly and then execute:</p>
+
+<pre><code>ant -f rt-jasper-distribution/build.xml clean deploy
+/etc/init.d/tomcat6 restart
+</code></pre>
+
+<h3>Configure JasperReports Server</h3>
+
+<p>Please edit you JasperReports Server according to the following patches:</p>
+
+<div class="highlight">
+<pre><span class="gd">--- /var/lib/tomcat6/webapps/jasperserver/WEB-INF/classes/jasperreports.properties.orig  2012-04-19 22:56:24.000000000 +0200</span>
+<span class="gi">+++ /var/lib/tomcat6/webapps/jasperserver/WEB-INF/classes/jasperreports.properties  2012-04-19 22:58:42.000000000 +0200</span>
+<span class="gu">@@ -1,5 +1,6 @@</span>
+net.sf.jasperreports.query.executer.factory.sql=com.jaspersoft.jasperserver.api.engine.jasperreports.util.JRTimezoneJdbcQueryExecuterFactory
+net.sf.jasperreports.query.executer.factory.HiveQL=com.jaspersoft.hadoop.hive.HiveQueryExecuterFactory
+<span class="gi">+net.sf.jasperreports.query.executer.factory.RTRIQL=de.boksa.jasper.rt.util.JRRTRESTInterfaceQueryExecuterFactory</span>
+
+#limit the crosstab bucket/measure count to prevent out of memory errors
+net.sf.jasperreports.crosstab.bucket.measure.limit=100000
+</pre>
+</div>
+
+
+<div class="highlight">
+<pre><span class="gd">--- /var/lib/tomcat6/webapps/jasperserver/WEB-INF/flows/queryBeans.xml.orig  2012-04-19 22:56:16.000000000 +0200</span>
+<span class="gi">+++ /var/lib/tomcat6/webapps/jasperserver/WEB-INF/flows/queryBeans.xml  2012-04-19 22:57:48.000000000 +0200</span>
+<span class="gu">@@ -20,6 +20,7 @@</span>
+                &lt;value&gt;hql&lt;/value&gt;
+                &lt;value&gt;domain&lt;/value&gt;
+                &lt;value&gt;HiveQL&lt;/value&gt;
+<span class="gi">+               &lt;value&gt;RTRIQL&lt;/value&gt;</span>
+            &lt;/list&gt;
+        &lt;/property&gt;
+        &lt;property name="queryLanguagesRequestAttrName" value="queryLanguages"/&gt;
+</pre>
+</div>
+
+
+<h3>Congratulations</h3>
+
+<p>You should now be able to configure RT DataSources as well as define RTRIQL (RT Rest Interface Query Language) queries.</p>
+
+<h3>Further information</h3>
+
+<p>For further information please refert to the <a href="https://github.com/bboksa/RT-Jasper/wiki">RT-Jasper Wiki</a>.</p>
+
+<hr><p>Copyright (C) 2012  Benjamin Boksa (<a href="http://www.boksa.de/">http://www.boksa.de/</a>).
+Licensed under the AGPL, Version 3.0. See LICENSE for details.</p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/bboksa">bboksa</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
