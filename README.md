@@ -45,6 +45,37 @@ ant -f rt-jasper-distribution/build.xml clean deploy
 /etc/init.d/tomcat6 restart
 ```
 
+### Configure JasperReports Server
+
+Please edit you JasperReports Server according to the following patches:
+
+```diff
+--- /var/lib/tomcat6/webapps/jasperserver/WEB-INF/classes/jasperreports.properties.orig  2012-04-19 22:56:24.000000000 +0200
++++ /var/lib/tomcat6/webapps/jasperserver/WEB-INF/classes/jasperreports.properties	2012-04-19 22:58:42.000000000 +0200
+@@ -1,5 +1,6 @@
+net.sf.jasperreports.query.executer.factory.sql=com.jaspersoft.jasperserver.api.engine.jasperreports.util.JRTimezoneJdbcQueryExecuterFactory
+net.sf.jasperreports.query.executer.factory.HiveQL=com.jaspersoft.hadoop.hive.HiveQueryExecuterFactory
++net.sf.jasperreports.query.executer.factory.RTRIQL=de.boksa.jasper.rt.util.JRRTRESTInterfaceQueryExecuterFactory
+
+#limit the crosstab bucket/measure count to prevent out of memory errors
+net.sf.jasperreports.crosstab.bucket.measure.limit=100000
+```
+
+```diff
+--- /var/lib/tomcat6/webapps/jasperserver/WEB-INF/flows/queryBeans.xml.orig  2012-04-19 22:56:16.000000000 +0200
++++ /var/lib/tomcat6/webapps/jasperserver/WEB-INF/flows/queryBeans.xml	2012-04-19 22:57:48.000000000 +0200
+@@ -20,6 +20,7 @@
+				<value>hql</value>
+				<value>domain</value>
+                <value>HiveQL</value>
++				<value>RTRIQL</value>
+			</list>
+		</property>
+		<property name="queryLanguagesRequestAttrName" value="queryLanguages"/>
+```
+
+### Congratulations
+
 You should now be able to configure RT DataSources as well as define RTRIQL (RT Rest Interface Query Language) queries.
 
 ### Further information
